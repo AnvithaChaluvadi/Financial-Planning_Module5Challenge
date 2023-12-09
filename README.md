@@ -2,7 +2,7 @@
 ##### Anvitha Chaluvadi
 
 <p align="center">
-<img src = Images/planner.gif width =40% height 30%=/>
+<img src = Images/planner.gif width =50% height 30%=/>
 </p>
 
 ## Background
