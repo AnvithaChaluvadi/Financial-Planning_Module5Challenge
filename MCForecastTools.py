@@ -166,7 +166,8 @@ class MCSimulation:
         if not isinstance(self.simulated_return,pd.DataFrame):
             self.calc_cumulative_return()
             
-        metrics = self.simulated_return.iloc[-1].describe()
+        metrics = self.simulated_return.iloc[[-1]].describe()
         ci_series = self.confidence_interval
         ci_series.index = ["95% CI Lower","95% CI Upper"]
-        return metrics.append(ci_series)
+        #return metrics.append(ci_series)
+        return pd.concat([metrics,ci_series],axis = 0)
