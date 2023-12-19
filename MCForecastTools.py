@@ -161,13 +161,22 @@ class MCSimulation:
         Calculate final summary statistics for Monte Carlo simulated stock data.
         
         """
-        
+
+# .append no longer works in my version of pandas, so I change the source code to concat
+# # source code attribution: https://chat.openai.com/share/b6e94ae4-f6f6-433f-8d2e-8ba38886c67c.
+# if not isinstance(self.simulated_return, pd.DataFrame):
+    # self.calc_cumulative_return()
+# metrics = self.simulated_return.iloc[-1].describe()
+# ci_series = self.confidence_interval
+# ci_series.index = ["95% CI Lower", "95% CI Upper"]
+# result = pd.concat([metrics, ci_series]) <----------CHANGED
+# return result <----------CHANGED
         # Check to make sure that simulation has run previously. 
-        if not isinstance(self.simulated_return,pd.DataFrame):
+        if not isinstance(self.simulated_return, pd.DataFrame):
             self.calc_cumulative_return()
-            
-        metrics = self.simulated_return.iloc[[-1]].describe()
+
+        metrics = self.simulated_return.iloc[-1].describe()
         ci_series = self.confidence_interval
-        ci_series.index = ["95% CI Lower","95% CI Upper"]
-        #return metrics.append(ci_series)
-        return pd.concat([metrics,ci_series],axis = 0)
+        ci_series.index = ["95% CI Lower", "95% CI Upper"]
+        result = pd.concat([metrics, ci_series])
+        return result
